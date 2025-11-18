@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training - ECAM</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f5f6f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 12px;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            max-width: 1100px;
+            width: 100%;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .hero {
+            background: linear-gradient(160deg, #f97316 0%, #ef4444 100%);
+            color: #ffffff;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .hero strong {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 48px 42px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .content h2 {
+            font-size: 1.6rem;
+            color: #0f172a;
+        }
+
+        .panel {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .panel h3 {
+            font-size: 1.2rem;
+            color: #1d4ed8;
+        }
+
+        .panel ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .panel li {
+            display: flex;
+            gap: 14px;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        .panel li span {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #e0e7ff;
+            color: #312e81;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .note {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <section class="hero">
+            <h1>Oups ! Ce lien venait d’une simulation ECAM.</h1>
+            <p>
+                Nous sommes un groupe d’étudiant·e·s en Master 2 informatique à l’ECAM.
+                Pour le laboratoire de sécurité logicielle, nous devions concevoir un scénario
+                de sensibilisation avec une fausse adresse.
+            </p>
+            <p>
+                Cette campagne visait un groupe précis : les premières années de bachelier ECAM.
+                C’est donc un exercice de spear phishing, pensé pour vos usages quotidiens.
+            </p>
+            <strong>Respire, tu peux encore tirer des leçons utiles.</strong>
+        </section>
+        <section class="content">
+            <h2>Ce que tu pouvais remarquer</h2>
+            <div class="panel">
+                <h3>Indices visibles</h3>
+                <ul>
+                    <li>
+                        <span>01</span>
+                        Adresse expéditeur : nous avons écrit « rn » à la place du « m » dans ECAM.
+                        Une vérification de l’adresse complète aurait mis la puce à l’oreille.
+                    </li>
+                    <li>
+                        <span>02</span>
+                        Domaine de la page : l’URL utilisée pour le test ne correspond pas aux services
+                        officiels ECAM. Copier l’adresse dans un nouvel onglet reste un bon réflexe.
+                    </li>
+                    <li>
+                        <span>03</span>
+                        Contexte inhabituel : un message qui cible un événement non annoncé par
+                        les canaux institutionnels est souvent un signal.
+                    </li>
+                </ul>
+            </div>
+            <p class="note">
+                Merci d’avoir joué le jeu. En cas de doute à l’avenir, contacte l’équipe IT avant de
+                saisir tes identifiants. Nous sommes disponibles pour expliquer la démarche
+                et partager d’autres outils de vérification.
+            </p>
+        </section>
+    </div>
+</body>
+</html>
