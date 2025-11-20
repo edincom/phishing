@@ -175,10 +175,9 @@
             placeholder="someone@example.com"
           />
 
-          <!-- 🔥 NOUVEAU : lien "Votre compte n'est pas accessible" -->
           <div
             class="link"
-            onclick="alert('Procédure interne : contacter le support ECAM.')"
+            onclick="alert('Procédure interne : Contacter le support ECAM.')"
           >
             Votre compte n'est pas accessible ?
           </div>
@@ -206,10 +205,9 @@
             placeholder="Mot de passe"
           />
 
-          <!-- 🔥 NOUVEAU : lien "J'ai oublié mon mot de passe" -->
           <div
             class="link"
-            onclick="alert('Erreur de service: contacter le support ECAM.')"
+            onclick="alert('Erreur de service interne: Contacter le support ECAM.')"
           >
             J'ai oublié mon mot de passe
           </div>
@@ -228,20 +226,43 @@
     <script>
       function goToPassword() {
         const email = emailInput.value.trim();
-        const error = emailError;
+        const error = document.getElementById("emailError");
 
-        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-        if (!valid) {
+        if (!email) {
+          error.innerText =
+            "Entrez une adresse e-mail, un numéro de téléphone ou identifiant Skype valide.";
           error.style.display = "block";
           return;
         }
 
-        error.style.display = "none";
-        emailDisplay.innerText = email;
+        // Regex : 5 ou 6 chiffres @ecam.be
+        const correctFormat = /^[0-9]{5,6}@ecam\.be$/;
 
-        emailScreen.style.display = "none";
-        passwordScreen.style.display = "block";
+        // Format : 5 ou 6 chiffres @ n'importe quoi
+        const hasCorrectIdWrongDomain = /^[0-9]{5,6}@[a-z0-9.-]+\.[a-z]+$/i;
+
+        // Si format correct → OK
+        if (correctFormat.test(email)) {
+          error.style.display = "none";
+          emailDisplay.innerText = email;
+
+          emailScreen.style.display = "none";
+          passwordScreen.style.display = "block";
+          return;
+        }
+
+        // Identifiant correct (5–6 chiffres) mais mauvais domaine
+        if (hasCorrectIdWrongDomain.test(email)) {
+          error.innerText =
+            "Nous n'avons trouvé aucun compte avec ce nom d'utilisateur.";
+          error.style.display = "block";
+          return;
+        }
+
+        // Format incorrect
+        error.innerText =
+          "Ce nom d'utilisateur est peut-être incorrect. Assurez-vous de l'avoir tapé correctement. Dans le cas contraire, contactez votre administrateur.";
+        error.style.display = "block";
       }
 
       function backToEmail() {
