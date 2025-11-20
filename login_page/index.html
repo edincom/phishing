@@ -2,128 +2,94 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- 🔥 CHANGEMENT ESSENTIEL POUR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Connexion — Compte Microsoft</title>
 
     <style>
       :root {
         --bg-url: url("./ecam_background.jpeg");
-        --overlay-color: rgba(
-          6,
-          18,
-          41,
-          0.45
-        ); /* couleur foncée semi-transparente pour contraste */
-        --card-bg: rgba(255, 255, 255, 1); /* carte légèrement transparente */
-        --card-shadow: 0 8px 24px rgba(2, 6, 23, 0.16);
         --accent: #0067b8;
+
+        /* Variables spéciales pour mobile */
+        --card-padding-desktop: 36px;
+        --card-padding-mobile: 20px;
       }
 
-      /* Full-screen background */
       html,
       body {
-        height: 100%;
         margin: 0;
+        height: 100%;
       }
 
+      /* 🔥 FULLSCREEN background */
       body {
         font-family: "Segoe UI", sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
+
         background-image: var(--bg-url);
         background-size: cover;
-        background-position: center center;
+        background-position: center;
         background-repeat: no-repeat;
+
         position: relative;
-        padding: 40px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
       }
 
-      /* Dark overlay to keep text readable */
+      /* Overlay sombre */
       body::before {
         content: "";
         position: fixed;
         inset: 0;
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.55) 0%,
-          rgba(0, 0, 0, 0.55) 100%
-        );
-        pointer-events: none;
+        background: rgba(0, 0, 0, 0.55);
         z-index: 0;
       }
 
-      /* Optional: subtle pattern / vignette for brand feel */
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: radial-gradient(
-            1000px 600px at 10% 20%,
-            rgba(255, 255, 255, 0.03),
-            transparent 10%
-          ),
-          radial-gradient(
-            800px 500px at 90% 80%,
-            rgba(0, 0, 0, 0.05),
-            transparent 12%
-          );
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      /* Card (form) */
+      /* CARD */
       #container {
         width: 440px;
-        max-width: calc(100% - 48px);
-        background: var(--card-bg);
-        box-shadow: var(--card-shadow);
+        background: white;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         position: relative;
-        z-index: 1; /* above overlay */
-        overflow: hidden;
-        /* glass effect on supported browsers */
-        backdrop-filter: blur(6px) saturate(120%);
-        -webkit-backdrop-filter: blur(6px) saturate(120%);
+        z-index: 1;
       }
 
-      /* header paddings and logo */
+      /* HEADER */
       #header {
-        padding: 36px 36px 18px 36px;
+        padding: var(--card-padding-desktop);
       }
+
       #header img {
         width: 180px;
-        display: block;
-        margin-bottom: 28px;
+        margin-bottom: 32px;
       }
 
       h2 {
         margin: 0 0 6px 0;
-        font-size: 22px;
+        font-size: 23px;
         font-weight: 600;
-        color: #111;
       }
 
       p {
-        margin: 0;
-        color: #333;
         font-size: 14px;
+        margin: 0 0 12px 0;
       }
 
+      /* INPUTS */
       input {
         width: 100%;
-        padding: 10px 8px;
+        padding: 12px;
         margin-top: 16px;
-        font-size: 15px;
+
+        font-size: 16px;
+
         border: none;
-        border-bottom: 1px solid #8b8b8b;
+        border-bottom: 2px solid #888;
         outline: none;
         background: transparent;
-        color: #111;
-      }
-
-      input::placeholder {
-        color: #8b8b8b;
       }
 
       input:focus {
@@ -132,79 +98,110 @@
 
       .error {
         color: #ea2132;
+        margin-top: 10px;
         font-size: 15px;
-        margin-top: 8px;
         display: none;
       }
 
-      .link {
-        margin-top: 14px;
-        font-size: 14px;
-        color: var(--accent);
-        cursor: pointer;
-      }
-
       #footer {
-        background: rgba(
-          0,
-          0,
-          0,
-          0
-        ); /* keep transparent so card looks unified */
-        padding: 14px 36px 28px 36px;
+        padding: var(--card-padding-desktop);
         text-align: right;
       }
 
       button {
         background: var(--accent);
-        color: #fff;
-        border: none;
-        padding: 10px 22px;
-        font-size: 15px;
+        color: white;
+
+        padding: 12px 28px;
         border-radius: 3px;
+        border: none;
         cursor: pointer;
+
+        font-size: 16px;
       }
+
       button:hover {
         background: #005a9e;
       }
 
-      /* Responsive adjustments */
-      @media (max-width: 480px) {
-        #header {
-          padding: 28px 18px 12px 18px;
-        }
-        #footer {
-          padding: 12px 18px 20px 18px;
-        }
-        #header img {
-          width: 84px;
-          margin-bottom: 22px;
-        }
+      /* LINK */
+      .link {
+        margin-top: 18px;
+        font-size: 15px;
+        color: var(--accent);
+        cursor: pointer;
       }
 
-      /* Accessible contrast fallback: if image fails, use this color */
-      .fallback-bg {
-        background-color: #0b2a4a; /* organisation color fallback */
+      /* --------------------------------------------------- */
+      /* 🔥 RESPONSIVE MOBILE */
+      /* --------------------------------------------------- */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 0;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
+
+        #container {
+          width: 100%;
+          height: 100%;
+          max-height: 100%;
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        #header {
+          padding: var(--card-padding-mobile);
+        }
+
+        #footer {
+          padding: var(--card-padding-mobile);
+        }
+
+        #header img {
+          width: 140px;
+          margin-bottom: 22px;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+
+        input {
+          font-size: 18px;
+          padding: 14px 10px;
+        }
+
+        button {
+          width: 100%;
+          padding: 16px;
+          font-size: 17px;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div id="container" role="main" aria-labelledby="signin-title">
-      <!-- Écran EMAIL -->
+    <div id="container">
+      <!-- 🔥 PAGE EMAIL -->
       <div id="emailScreen">
         <div id="header">
-          <img src="./ecam_logo.jpeg" alt="Logo de l'organisation" />
-          <h2 id="signin-title">Se connecter</h2>
-          <div id="emailError" class="error" role="alert">
-            Entrez une adresse e-mail, un numéro de téléphone ou identifiant
-            Skype valide.
+          <img src="./ecam_logo.jpeg" alt="Logo" />
+          <h2>Se connecter</h2>
+
+          <div id="emailError" class="error">
+            Entrez une adresse e-mail valide.
           </div>
+
           <input
             id="emailInput"
             type="text"
             placeholder="someone@example.com"
-            aria-label="Adresse e-mail"
           />
         </div>
 
@@ -213,14 +210,14 @@
         </div>
       </div>
 
-      <!-- Écran PASSWORD -->
+      <!-- 🔥 PAGE PASSWORD -->
       <div id="passwordScreen" style="display: none">
         <div id="header">
           <img src="./ecam_logo.jpeg" alt="Logo" />
           <h2 id="emailDisplay"></h2>
           <p>Entrez le mot de passe.</p>
 
-          <div id="passwordError" class="error" role="alert">
+          <div id="passwordError" class="error">
             Veuillez saisir votre mot de passe.
           </div>
 
@@ -228,7 +225,6 @@
             id="passwordInput"
             type="password"
             placeholder="Mot de passe"
-            aria-label="Mot de passe"
           />
 
           <div class="link" onclick="backToEmail()">
@@ -243,78 +239,38 @@
     </div>
 
     <script>
-      /* Basic flow (unchanged) */
       function goToPassword() {
-        const email = document.getElementById("emailInput").value.trim();
+        const email = emailInput.value.trim();
         const error = document.getElementById("emailError");
 
-        // Validation regex simple pour un email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-        if (!email || !emailRegex.test(email)) {
+        if (!valid) {
           error.style.display = "block";
           return;
         }
+
         error.style.display = "none";
-        document.getElementById("emailDisplay").innerText = email;
-        document.getElementById("emailScreen").style.display = "none";
-        document.getElementById("passwordScreen").style.display = "block";
+        emailDisplay.innerText = email;
+
+        emailScreen.style.display = "none";
+        passwordScreen.style.display = "block";
       }
+
       function backToEmail() {
-        document.getElementById("passwordScreen").style.display = "none";
-        document.getElementById("emailScreen").style.display = "block";
+        passwordScreen.style.display = "none";
+        emailScreen.style.display = "block";
       }
+
       function submitLogin() {
-        const email = document.getElementById("emailDisplay").innerText;
-        const password = document.getElementById("passwordInput").value.trim();
-        const error = document.getElementById("passwordError");
-        if (!password) {
-          error.style.display = "block";
+        const pwd = passwordInput.value.trim();
+        if (!pwd) {
+          passwordError.style.display = "block";
           return;
         }
-        error.style.display = "none";
+
         location.href = "training-sensibiliation.html";
       }
-
-      /* Optional: dynamic background selection by query param or host
-       Usage examples:
-         index.html?bg=marketing  -> will use mapping below
-         or automatic per-host using location.hostname
-    */
-      (function () {
-        const mapping = {
-          marketing: "bg-marketing.jpg",
-          office: "bg-office.jpg",
-          default: "bg-signin.jpg",
-        };
-
-        const params = new URLSearchParams(location.search);
-        const key = params.get("bg");
-
-        const img = key && mapping[key] ? mapping[key] : null;
-
-        if (img) {
-          try {
-            document.documentElement.style.setProperty(
-              "--bg-url",
-              `url('${img}')`
-            );
-          } catch (e) {}
-        }
-
-        // Example: per-host backgrounds (uncomment and adapt)
-        // if (location.hostname.endsWith('eu.example.com')) {
-        //   document.documentElement.style.setProperty('--bg-url', "url('bg-eu.jpg')");
-        // }
-
-        // If background fails (image 404), keep a fallback solid color:
-        const urlVal = getComputedStyle(document.documentElement)
-          .getPropertyValue("--bg-url")
-          .trim();
-        if (!urlVal || urlVal === 'url("")') {
-          document.body.classList.add("fallback-bg");
-        }
-      })();
     </script>
   </body>
 </html>
