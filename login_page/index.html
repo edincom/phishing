@@ -124,19 +124,24 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: var(--accent);
-        font-size: 15px;
+        color: #5c5c5c; /* match arrow/email color from reference */
+        font-size: 14px;
         cursor: pointer;
-        margin-bottom: 8px;
+        margin-bottom: 10px; /* slight breathing room like reference */
       }
 
       .back-line .arrow {
-        font-size: 18px;
-        line-height: 1;
+        font-size: 20px;
+        line-height: 0;
+        font-weight: 600;
+        color: #5c5c5c;
+        position: relative;
+        top: -2px; /* nudge up to align vertically with email */
       }
 
       .back-line .email-small {
-        font-weight: 600;
+        font-weight: 400;
+        color: #5c5c5c;
       }
 
       /* MOBILE */
