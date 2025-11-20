@@ -51,16 +51,16 @@
       }
 
       #header {
-        padding: 24px 32px 8px 32px; /* further tighten top/bottom spacing */
+        padding: var(--card-padding-desktop);
       }
 
       #header img {
         width: 180px;
-        margin-bottom: 14px; /* reduce gap above the heading */
+        margin-bottom: 32px;
       }
 
       h2 {
-        margin: 0 0 2px 0; /* tighter space below heading */
+        margin: 0 0 6px 0;
         font-size: 23px;
         font-weight: 600;
       }
@@ -72,13 +72,11 @@
 
       input {
         width: 100%;
-        padding: 9px 8px 9px 0;
-        margin-top: 12px;
-
-        font-size: 15px;
-
+        padding: 12px;
+        margin-top: 16px;
+        font-size: 16px;
         border: none;
-        border-bottom: 1px solid #888;
+        border-bottom: 2px solid #888;
         outline: none;
         background: transparent;
       }
@@ -95,8 +93,7 @@
       }
 
       #footer {
-        margin-top: 26px; /* more space between help link and button */
-        padding: 10px 32px 20px 32px;
+        padding: var(--card-padding-desktop);
         text-align: right;
       }
 
@@ -115,10 +112,11 @@
       }
 
       .link {
-        margin-top: 10px;
-        font-size: 14px;
+        margin-top: 18px;
+        font-size: 15px;
         color: var(--accent);
         cursor: pointer;
+        display: inline-block;
       }
 
       .back-line {
@@ -170,7 +168,7 @@
 
         input {
           font-size: 18px;
-          padding: 14px 10px 14px 0;
+          padding: 14px 10px;
         }
 
         button {
@@ -182,9 +180,8 @@
     </style>
   </head>
 
-    <body>
+  <body>
     <div id="container">
-      <!-- PAGE EMAIL -->
       <!-- PAGE EMAIL -->
       <div id="emailScreen">
         <div id="header">
@@ -213,7 +210,6 @@
         </div>
       </div>
 
-      <!-- PAGE PASSWORD -->
       <!-- PAGE PASSWORD -->
       <div id="passwordScreen" style="display: none">
         <div id="header">
@@ -245,7 +241,6 @@
           >
             J'ai oublié mon mot de passe
           </div>
-
         </div>
 
         <div id="footer">
@@ -259,10 +254,9 @@
         const email = emailInput.value.trim();
         const error = document.getElementById("emailError");
 
-        const ecamFiveDigits = /^\d{5}@ecam\.be$/i;
-        const valid = ecamFiveDigits.test(email);
-
-        if (!valid) {
+        if (!email) {
+          error.innerText =
+            "Entrez une adresse e-mail, un numéro de téléphone ou identifiant Skype valide.";
           error.style.display = "block";
           return;
         }
