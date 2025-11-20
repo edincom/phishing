@@ -59,16 +59,16 @@
 
       /* HEADER */
       #header {
-        padding: var(--card-padding-desktop);
+        padding: 24px 32px 8px 32px; /* further tighten top/bottom spacing */
       }
 
       #header img {
         width: 180px;
-        margin-bottom: 32px;
+        margin-bottom: 14px; /* reduce gap above the heading */
       }
 
       h2 {
-        margin: 0 0 6px 0;
+        margin: 0 0 2px 0; /* tighter space below heading */
         font-size: 23px;
         font-weight: 600;
       }
@@ -81,13 +81,13 @@
       /* INPUTS */
       input {
         width: 100%;
-        padding: 12px;
-        margin-top: 16px;
+        padding: 9px 8px 9px 0;
+        margin-top: 12px;
 
-        font-size: 16px;
+        font-size: 15px;
 
         border: none;
-        border-bottom: 2px solid #888;
+        border-bottom: 1px solid #888;
         outline: none;
         background: transparent;
       }
@@ -104,7 +104,8 @@
       }
 
       #footer {
-        padding: var(--card-padding-desktop);
+        margin-top: 26px; /* more space between help link and button */
+        padding: 10px 32px 20px 32px;
         text-align: right;
       }
 
@@ -126,10 +127,29 @@
 
       /* LINK */
       .link {
-        margin-top: 18px;
-        font-size: 15px;
+        margin-top: 10px;
+        font-size: 14px;
         color: var(--accent);
         cursor: pointer;
+      }
+
+      .back-line {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--accent);
+        font-size: 15px;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+
+      .back-line .arrow {
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .back-line .email-small {
+        font-weight: 600;
       }
 
       /* --------------------------------------------------- */
@@ -174,7 +194,7 @@
 
         input {
           font-size: 18px;
-          padding: 14px 10px;
+          padding: 14px 10px 14px 0;
         }
 
         button {
@@ -186,9 +206,9 @@
     </style>
   </head>
 
-  <body>
+    <body>
     <div id="container">
-      <!-- 🔥 PAGE EMAIL -->
+      <!-- PAGE EMAIL -->
       <div id="emailScreen">
         <div id="header">
           <img src="./ecam_logo.jpeg" alt="Logo" />
@@ -203,6 +223,7 @@
             type="text"
             placeholder="someone@example.com"
           />
+          <div class="link">Votre compte n'est pas accessible ?</div>
         </div>
 
         <div id="footer">
@@ -210,12 +231,20 @@
         </div>
       </div>
 
-      <!-- 🔥 PAGE PASSWORD -->
+      <!-- PAGE PASSWORD -->
       <div id="passwordScreen" style="display: none">
         <div id="header">
           <img src="./ecam_logo.jpeg" alt="Logo" />
-          <h2 id="emailDisplay"></h2>
-          <p>Entrez le mot de passe.</p>
+          <div
+            class="back-line"
+            onclick="backToEmail()"
+            role="button"
+            aria-label="Retour a l'ecran de saisie de l'adresse e-mail"
+          >
+            <span class="arrow" aria-hidden="true">&larr;</span>
+            <span id="emailDisplay" class="email-small"></span>
+          </div>
+          <h2 id="passwordTitle">Entrez le mot de passe</h2>
 
           <div id="passwordError" class="error">
             Veuillez saisir votre mot de passe.
@@ -227,13 +256,11 @@
             placeholder="Mot de passe"
           />
 
-          <div class="link" onclick="backToEmail()">
-            ← Utiliser un autre compte
-          </div>
+          <div class="link">J'ai oublie mon mot de passe</div>
         </div>
 
         <div id="footer">
-          <button onclick="submitLogin()">Connexion</button>
+          <button onclick="submitLogin()">Se connecter</button>
         </div>
       </div>
     </div>
@@ -243,7 +270,8 @@
         const email = emailInput.value.trim();
         const error = document.getElementById("emailError");
 
-        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        const ecamFiveDigits = /^\d{5}@ecam\.be$/i;
+        const valid = ecamFiveDigits.test(email);
 
         if (!valid) {
           error.style.display = "block";
